@@ -20,13 +20,13 @@ class Email {
     public function enviarConfirmacion() {
 
          // create a new object
-         $mail = new PHPMailer();
-         $mail->isSMTP();
-         $mail->Host = 'smtp.mailtrap.io';
-         $mail->SMTPAuth = true;
-         $mail->Port = 2525;
-         $mail->Username = '4ec54dfb980a42';
-         $mail->Password = 'ae938c99960f22';
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Port = 2525;
+        $mail->Username = 'a2402c03928355';
+        $mail->Password = '62ffa0d3f54351';
      
          $mail->setFrom('cuentas@appsalon.com');
          $mail->addAddress('cuentas@appsalon.com', 'AppSalon.com');

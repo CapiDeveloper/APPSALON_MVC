@@ -1,6 +1,6 @@
 <?php
 namespace Model;
-class CitaServicios extends ActiveRecord {
+class CitaServicio extends ActiveRecord {
     protected static $tabla = 'citasservicios';
     protected static $columnasDB = ['id','servicioId','citaId'];
 
