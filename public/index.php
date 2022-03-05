@@ -12,24 +12,24 @@ use MVC\Router;
 $router = new Router();
 
 //Iniciar seccion
-$router->get('/',[loginController::class,'login']);
-$router->post('/',[loginController::class,'login']);
+$router->get('/',[LoginController::class,'login']);
+$router->post('/',[LoginController::class,'login']);
 //Cerrar session
-$router->get('/logout',[loginController::class,'logout']);
+$router->get('/logout',[LoginController::class,'logout']);
 
 //Recuperar password
-$router->get('/olvide',[loginController::class,'olvide']);
-$router->post('/olvide',[loginController::class,'olvide']);
-$router->get('/recuperar',[loginController::class,'recuperar']);
-$router->post('/recuperar',[loginController::class,'recuperar']);
+$router->get('/olvide',[LoginController::class,'olvide']);
+$router->post('/olvide',[LoginController::class,'olvide']);
+$router->get('/recuperar',[LoginController::class,'recuperar']);
+$router->post('/recuperar',[LoginController::class,'recuperar']);
 
 //Crear Cuentas
-$router->get('/crear-cuenta',[loginController::class,'crear']);
-$router->post('/crear-cuenta',[loginController::class,'crear']);
+$router->get('/crear-cuenta',[LoginController::class,'crear']);
+$router->post('/crear-cuenta',[LoginController::class,'crear']);
 
 //Confirmar cuenta
-$router->get('/confirmar-cuenta',[loginController::class,'confirmar']);
-$router->get('/mensaje',[loginController::class,'mensaje']);
+$router->get('/confirmar-cuenta',[LoginController::class,'confirmar']);
+$router->get('/mensaje',[LoginController::class,'mensaje']);
 
 //*Area Privada*
 $router->get('/cita',[CitaController::class,'index']);
