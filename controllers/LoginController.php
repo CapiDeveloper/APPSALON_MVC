@@ -5,7 +5,7 @@ use Classes\Email;
 use MVC\Router;
 use Model\Usuario;
 
-class loginController{
+class LoginController{
     public static function login(Router $router){
         $alertas=[];
         $auth = new Usuario;
