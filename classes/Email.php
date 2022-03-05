@@ -1,73 +1,80 @@
 <?php
+
 namespace Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-class Email{
+class Email {
 
-    public $nombre;
     public $email;
+    public $nombre;
     public $token;
-
-    public function __construct($nombre, $email, $token)
+    
+    public function __construct($email, $nombre, $token)
     {
-        $this->nombre = $nombre;
         $this->email = $email;
-        $this->token = $token;    
+        $this->nombre = $nombre;
+        $this->token = $token;
     }
-    public function enviarConfirmacion(){
-//vamosa crear el objeto de email - todo a continuacion esta en mailtrap
+
+    public function enviarConfirmacion() {
+
+         // create a new object
+         $mail = new PHPMailer();
+         $mail->isSMTP();
+         $mail->Host = 'smtp.mailtrap.io';
+         $mail->SMTPAuth = true;
+         $mail->Port = 2525;
+         $mail->Username = '4ec54dfb980a42';
+         $mail->Password = 'ae938c99960f22';
+     
+         $mail->setFrom('cuentas@appsalon.com');
+         $mail->addAddress('cuentas@appsalon.com', 'AppSalon.com');
+         $mail->Subject = 'Confirma tu Cuenta';
+
+         // Set HTML
+         $mail->isHTML(TRUE);
+         $mail->CharSet = 'UTF-8';
+
+         $contenido = '<html>';
+         $contenido .= "<p><strong>Hola " . $this->email .  "</strong> Has Creado tu cuenta en App Salón, solo debes confirmarla presionando el siguiente enlace</p>";
+         $contenido .= "<p>Presiona aquí: <a href='http://localhost:3000/confirmar-cuenta?token=" . $this->token . "'>Confirmar Cuenta</a>";        
+         $contenido .= "<p>Si tu no solicitaste este cambio, puedes ignorar el mensaje</p>";
+         $contenido .= '</html>';
+         $mail->Body = $contenido;
+
+         //Enviar el mail
+         $mail->send();
+
+    }
+
+    public function enviarInstrucciones() {
+
+        // create a new object
         $mail = new PHPMailer();
         $mail->isSMTP();
         $mail->Host = 'smtp.mailtrap.io';
         $mail->SMTPAuth = true;
         $mail->Port = 2525;
-        $mail->Username = 'a2402c03928355';
-        $mail->Password = '62ffa0d3f54351';
+        $mail->Username = '4ec54dfb980a42';
+        $mail->Password = 'ae938c99960f22';
+    
+        $mail->setFrom('cuentas@appsalon.com');
+        $mail->addAddress('cuentas@appsalon.com', 'AppSalon.com');
+        $mail->Subject = 'Reestablece tu password';
 
-        $mail->setFrom('admin@capidev.com');
-        $mail->addAddress('cuentasapp@appsalon.com','appsalon.com');
-        $mail->Subject='Confirma tu cuenta';
-
-        //Set html
+        // Set HTML
         $mail->isHTML(TRUE);
-        $mail->CharSet ='UTF-8';
-        $contenido = "<html>";
-        $contenido .="<p><strong>Hola ".$this->nombre."</strong> Has creado una cuenta 
-        en appsalon, solo debes confirmarla presionando en el siguiente enlace</p>";
-        $contenido .= "<p>Presiona aqui: <a href='http://localhost:3000/confirmar-cuenta?token=". $this->token ."'> Confirmar Cuenta</a></p>";
-        $contenido .="<p>Si tu no solicistaste esta cuenta, puede ignorar el emnsaje</p>";
-        $contenido .="</html>";
+        $mail->CharSet = 'UTF-8';
 
+        $contenido = '<html>';
+        $contenido .= "<p><strong>Hola " . $this->nombre .  "</strong> Has solicitado reestablecer tu password, sigue el siguiente enlace para hacerlo.</p>";
+        $contenido .= "<p>Presiona aquí: <a href='http://localhost:3000/recuperar?token=" . $this->token . "'>Reestablecer Password</a>";        
+        $contenido .= "<p>Si tu no solicitaste este cambio, puedes ignorar el mensaje</p>";
+        $contenido .= '</html>';
         $mail->Body = $contenido;
-        //Por ultimo enviamos el email
+
+            //Enviar el mail
         $mail->send();
     }
-    public function enviarInstrucciones(){
-        $mail = new PHPMailer();
-        $mail->isSMTP();
-        $mail->Host = 'smtp.mailtrap.io';
-        $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = 'a2402c03928355';
-        $mail->Password = '62ffa0d3f54351';
-
-        $mail->setFrom('admin@capidev.com');
-        $mail->addAddress('cuentasapp@appsalon.com','appsalon.com');
-        $mail->Subject='Reestablece tu password';
-
-        //Set html
-        $mail->isHTML(TRUE);
-        $mail->CharSet ='UTF-8';
-        $contenido = "<html>";
-        $contenido .="<p><strong>Hola ".$this->nombre."</strong> Has solicitado reestablece tus password, sigue el
-        siguiente enlace para hacerlo</p>";
-        $contenido .= "<p>Presiona aqui: <a href='http://localhost:3000/recuperar?token=". $this->token ."'> Reestablecer contraseña</a></p>";
-        $contenido .="<p>Si tu no solicistaste esta cuenta, puede ignorar el emnsaje</p>";
-        $contenido .="</html>";
-
-        $mail->Body = $contenido;
-        //Por ultimo enviamos el email
-        $mail->send();
-    }
-} 
+}
